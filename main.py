@@ -1,19 +1,31 @@
+import datetime
 
-class Personaje:
-    def __init__(self, nombre, fuerza, vida):
-        self.nombre = nombre
-        self.fuerza = fuerza
-        self.vida = vida
+def calcular_presupuseto_tilbury():
+    print ("--- CALCULADORA DE PRESUPUESTO ESTILO TILBURY ---")
+    print ("Optimizado para el arbitraje de financiero desde Ecuador/n")
 
-    def atacar(self, enemigo):
-        print(f"Estado actual -> Nombre: {self.nombre} atacó a {enemigo} con fuerza de {self.fuerza}")
+    try:
+        # 1. User data entry
+        ingreso_bruto = float(input("Introduce tus ingresos de este mes : $"))
+        
+        # 2. Taxes Ecuador
+        # Si ganas menos de $20,000 al año el RIMPE cobra aprox. 1% de tasa efectiva
+        impuestos_ecuador = ingreso_bruto * 0.01
+        ingreso_neto = ingreso_bruto - impuestos_ecuador
 
-    def mostrar_estado(self):
-        print(f"Estado actual -> Nombre: {self.nombre}, Vida: {self.vida}")
+        # 3. Aplicacion de porcentajes optimizados
+        inversion_colchon = ingreso_neto * 0.70 
+        educacion_herramientas = ingreso_neto * 0.15
+        estilo_de_vida = ingreso_neto * 0.15
 
-print("--- INICIANDO SIMULACION ---")
+        # 4. Mostrar resultados en pantalla
+        print ("\n==================================")
+        print (f"Ingreso Bruto: ${ingreso_bruto:.2f}")
+        print (f"Reserva para impuestos (RIMPE): ${impuestos_ecuador:.2f}")
+        print (f"Ingreso Neto Real: ${ingreso_neto:,.2f}")
+        print ("\n==================================")
 
-heroe = Personaje("Ragnar",fuerza=45, vida=100)
-
-heroe.mostrar_estado()
-heroe.atacar("Un duende enemigo")
+    except ValueError:
+        print("Error: Por favor, introduce un número válido.")
+if __name__ == "__main__":
+    calcular_presupuseto_tilbury()
