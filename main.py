@@ -1,8 +1,16 @@
 import datetime
 
-def buscar():
+def guardar_en_historial(bruto, neto, inversion, educacion, estilo):
+    fecha_actual = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    with open("historial_presupuestos.txt", "a" encoding="utf-8") as archivo:
+        archivo.write(f"--- Registro: {fecha_actual} ---\n")
+        archivo.write(f"Ingreso Bruto: ${bruto:.2f} | Neto: {neto:,.2f}\n")
+        archivo.write(f"Colchón Milán (70%): ${inversion:,.2f}\n")
+        archivo.write(f"Educación/Idiomas (15%): ${educacion:,.2f}\n")
+        archivo.write(f"Estilo de Vida (15%): ${estilo:,.2f}\n")
+        archivo.write("-"*40+"\n\n")
 
-def calcular_presupuseto_tilbury():
+def calcular_presupuesto_tilbury():
     print ("--- CALCULADORA DE PRESUPUESTO ESTILO TILBURY ---")
     print ("Optimizado para el arbitraje de financiero desde Ecuador/n")
 
@@ -35,4 +43,4 @@ def calcular_presupuseto_tilbury():
     except ValueError:
         print("Error: Por favor, introduce un número válido.")
 if __name__ == "__main__":
-    calcular_presupuseto_tilbury()
+    calcular_presupuesto_tilbury()
