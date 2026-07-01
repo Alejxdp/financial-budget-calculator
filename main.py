@@ -2,7 +2,7 @@ import datetime
 
 def guardar_en_historial(bruto, neto, inversion, educacion, estilo):
     fecha_actual = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    with open("historial_presupuestos.txt", "a" encoding="utf-8") as archivo:
+    with open("historial_presupuestos.txt", "a", encoding="utf-8") as archivo:
         archivo.write(f"--- Registro: {fecha_actual} ---\n")
         archivo.write(f"Ingreso Bruto: ${bruto:.2f} | Neto: {neto:,.2f}\n")
         archivo.write(f"Colchón Milán (70%): ${inversion:,.2f}\n")
@@ -24,9 +24,9 @@ def calcular_presupuesto_tilbury():
         ingreso_neto = ingreso_bruto - impuestos_ecuador
 
         # 3. Aplicacion de porcentajes optimizados
-        inversion_colchon = ingreso_neto * 0.70 
+        inversion_colchon = ingreso_neto * 0.65 
         educacion_herramientas = ingreso_neto * 0.15
-        estilo_de_vida = ingreso_neto * 0.15
+        estilo_de_vida = ingreso_neto * 0.20
 
         # 4. Mostrar resultados en pantalla
         print ("\n==================================")
