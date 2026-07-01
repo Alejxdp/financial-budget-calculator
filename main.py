@@ -1,5 +1,7 @@
 import datetime
 
+def buscar():
+
 def calcular_presupuseto_tilbury():
     print ("--- CALCULADORA DE PRESUPUESTO ESTILO TILBURY ---")
     print ("Optimizado para el arbitraje de financiero desde Ecuador/n")
@@ -24,6 +26,11 @@ def calcular_presupuseto_tilbury():
         print (f"Reserva para impuestos (RIMPE): ${impuestos_ecuador:.2f}")
         print (f"Ingreso Neto Real: ${ingreso_neto:,.2f}")
         print ("\n==================================")
+        print (f"[70%] Colchón Milan / Fondos indexados: ${inversion_colchon:,.2f}")
+        print (f"[15%] Educación, idiomas y Herramientas: ${educacion_herramientas:,.2f}")
+        print (f"[15%] Estilo de vida y gastos personales: ${estilo_de_vida:,.2f}")
+        print ("\n==================================")
+        print ("Recuerda la frase de Tilbury: 'No muestres tu riqueza, construyela'.")
 
     except ValueError:
         print("Error: Por favor, introduce un número válido.")
