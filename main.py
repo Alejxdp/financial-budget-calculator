@@ -1,46 +1,56 @@
 import datetime
+from fastapi import FastAPI
+from pydantic import BaseModel
 
+# 1. Inicializamos la aplicación FastAPI
+app = FastAPI(
+    title="API de Presupuesto Estilo Mark Tilbury",
+    description="API para optimizar el arbitraje financiero y calcular la distribución de ingresos.",
+    version="1.0.0"
+)
+
+# 2. Definimos el "Modelo de Datos" (Qué datos espera recibir la API)
+class IngresoRequest(BaseModel):
+    ingreso_bruto: float
+
+# Función auxiliar para guardar el historial en el archivo de texto
 def guardar_en_historial(bruto, neto, inversion, educacion, estilo):
     fecha_actual = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     with open("historial_presupuestos.txt", "a", encoding="utf-8") as archivo:
-        archivo.write(f"--- Registro: {fecha_actual} ---\n")
-        archivo.write(f"Ingreso Bruto: ${bruto:.2f} | Neto: {neto:,.2f}\n")
-        archivo.write(f"Colchón Milán (70%): ${inversion:,.2f}\n")
-        archivo.write(f"Educación/Idiomas (15%): ${educacion:,.2f}\n")
-        archivo.write(f"Estilo de Vida (15%): ${estilo:,.2f}\n")
-        archivo.write("-"*40+"\n\n")
+        archivo.write(f"--- Registro API: {fecha_actual} ---\n")
+        archivo.write(f"Ingreso Bruto: ${bruto:,.2f} | Neto: ${neto:,.2f}\n")
+        archivo.write(f"💰 Colchón Milán (70%): ${inversion:,.2f}\n")
+        archivo.write(f"📚 Educación/Idiomas (15%): ${educacion:,.2f}\n")
+        archivo.write(f"🍕 Estilo de vida (15%): ${estilo:,.2f}\n")
+        archivo.write("-" * 40 + "\n\n")
 
-def calcular_presupuesto_tilbury():
-    print ("--- CALCULADORA DE PRESUPUESTO ESTILO TILBURY ---")
-    print ("Optimizado para el arbitraje de financiero desde Ecuador/n")
-
-    try:
-        # 1. User data entry
-        ingreso_bruto = float(input("Introduce tus ingresos de este mes : $"))
-        
-        # 2. Taxes Ecuador
-        # Si ganas menos de $20,000 al año el RIMPE cobra aprox. 1% de tasa efectiva
-        impuestos_ecuador = ingreso_bruto * 0.01
-        ingreso_neto = ingreso_bruto - impuestos_ecuador
-
-        # 3. Aplicacion de porcentajes optimizados
-        inversion_colchon = ingreso_neto * 0.65 
-        educacion_herramientas = ingreso_neto * 0.15
-        estilo_de_vida = ingreso_neto * 0.20
-
-        # 4. Mostrar resultados en pantalla
-        print ("\n==================================")
-        print (f"Ingreso Bruto: ${ingreso_bruto:.2f}")
-        print (f"Reserva para impuestos (RIMPE): ${impuestos_ecuador:.2f}")
-        print (f"Ingreso Neto Real: ${ingreso_neto:,.2f}")
-        print ("\n==================================")
-        print (f"[70%] Colchón Milan / Fondos indexados: ${inversion_colchon:,.2f}")
-        print (f"[15%] Educación, idiomas y Herramientas: ${educacion_herramientas:,.2f}")
-        print (f"[15%] Estilo de vida y gastos personales: ${estilo_de_vida:,.2f}")
-        print ("\n==================================")
-        print ("Recuerda la frase de Tilbury: 'No muestres tu riqueza, construyela'.")
-
-    except ValueError:
-        print("Error: Por favor, introduce un número válido.")
-if __name__ == "__main__":
-    calcular_presupuesto_tilbury()
+# 3. Creamos la Ruta de la API (El "Endpoint")
+@app.post("/calcular-presupuesto")
+def calcular_presupuesto(datos: IngresoRequest):
+    # El filtro de Tabares (Impuestos reales en Ecuador - RIMPE ~1%)
+    impuestos_ecuador = datos.ingreso_bruto * 0.01 
+    ingreso_neto = datos.ingreso_bruto - impuestos_ecuador
+    
+    # Lógica de distribución de Mark Tilbury (70 / 15 / 15)
+    inversion_colchon = ingreso_neto * 0.70
+    educacion_herramientas = ingreso_neto * 0.15
+    estilo_vida_novia = ingreso_neto * 0.15
+    
+    # Guardamos en el archivo de texto local
+    guardar_en_historial(datos.ingreso_bruto, ingreso_neto, inversion_colchon, educacion_herramientas, estilo_vida_novia)
+    
+    # 4. La API responde con un objeto JSON (Formato universal de datos)
+    return {
+        "status": "success",
+        "meta": "No muestres tu riqueza, constrúyela. - Mark Tilbury",
+        "resumen_financiero": {
+            "ingreso_bruto": round(datos.ingreso_bruto, 2),
+            "impuestos_rimpe_ecuador": round(impuestos_ecuador, 2),
+            "ingreso_neto_real": round(ingreso_neto, 2)
+        },
+        "distribucion_inteligente": {
+            "colchon_milan_70_porciento": round(inversion_colchon, 2),
+            "educacion_e_idiomas_15_porciento": round(educacion_herramientas, 2),
+            "estilo_vida_y_novia_15_porciento": round(estilo_vida_novia, 2)
+        }
+    }

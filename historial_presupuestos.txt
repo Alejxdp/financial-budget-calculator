@@ -1,0 +1,28 @@
+--- Registro: 2026-07-01 21:12:52 ---
+Ingreso Bruto: $1500.00 | Neto: 1,485.00
+Colchón Milán (70%): $965.25
+Educación/Idiomas (15%): $222.75
+Estilo de Vida (15%): $297.00
+----------------------------------------
+
+--- Registro API: 2026-07-01 22:15:02 ---
+Ingreso Bruto: $1,500.00 | Neto: $1,485.00
+💰 Colchón Milán (70%): $1,039.50
+📚 Educación/Idiomas (15%): $222.75
+🍕 Estilo de vida (15%): $222.75
+----------------------------------------
+
+--- Registro API: 2026-07-01 22:15:05 ---
+Ingreso Bruto: $1,500.00 | Neto: $1,485.00
+💰 Colchón Milán (70%): $1,039.50
+📚 Educación/Idiomas (15%): $222.75
+🍕 Estilo de vida (15%): $222.75
+----------------------------------------
+
+--- Registro: 2026-07-02 15:59:57 ---
+Ingreso Bruto: $482.00 | Neto: 477.18
+Colchón Milán (70%): $310.17
+Educación/Idiomas (15%): $71.58
+Estilo de Vida (15%): $95.44
+----------------------------------------
+
