@@ -27,7 +27,7 @@ def guardar_en_historial(bruto, neto, inversion, educacion, estilo):
 # 3. Creamos la Ruta de la API (El "Endpoint")
 @app.post("/calcular-presupuesto")
 def calcular_presupuesto(datos: IngresoRequest):
-    # El filtro de Tabares (Impuestos reales en Ecuador - RIMPE ~1%)
+    #Sistema de impuestos locales
     impuestos_ecuador = datos.ingreso_bruto * 0.01 
     ingreso_neto = datos.ingreso_bruto - impuestos_ecuador
     
